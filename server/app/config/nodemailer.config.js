@@ -6,11 +6,9 @@ const user = config.user;
 const pass = config.pass;
 
 const transport = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: user,
-    pass: pass,
-  },
+  host: 'localhost',
+  port: 1025,
+  ignoreTLS: true,
 });
 
 module.exports.sendConfirmationEmail = (name, email, confirmationCode) => {

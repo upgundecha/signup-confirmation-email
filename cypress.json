@@ -1,0 +1,8 @@
+{
+  "env": {
+    "SENDRIA_PROTOCOL": "http",
+    "SENDRIA_HOST": "localhost",
+    "SENDRIA_SMTP_PORT": "1025",
+    "SENDRIA_API_PORT": "1080"
+  }
+}
