@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo
+        ports:
+        # will assign a random free host port
+        - 27017/tcp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Start Sendria
+        uses: upgundecha/start-sendria-github-action@v1.0.0
+
+      - name: Start server
+        run: |
+          cd server
+          npm install
+          node server.js &
+
+      - name: Start website
+        run: |
+         npm install
+         npm start
+      
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
