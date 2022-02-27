@@ -27,13 +27,14 @@ jobs:
       - name: Start server
         run: |
           cd server
+          npm install dotenv
           npm install
           node server.js &
 
       - name: Start website
         run: |
          npm install
-         npm start
+         npm start &
       
       - name: Cypress run
         uses: cypress-io/github-action@v2
