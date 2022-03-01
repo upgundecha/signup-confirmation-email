@@ -18,7 +18,7 @@ describe('Sign up', () => {
     cy.get('div.alert-success').should('have.text', 'User was registered successfully! Please check your email');
     
     cy.sendriaGetMessageByEmailAddressAndSubject(email, 'Please confirm your account').then((message) => {
-      consol.log(email);
+      console.log(email);
       
       cy.sendriaGetMessageHtmlById(message.id).then((html) => {
         const link = html.match(/(?<=href=")(.*)(?=" target)/g)[0];
