@@ -19,6 +19,9 @@ describe('Sign up', () => {
 
     cy.sendriaGetMessageByEmailAddressAndSubject(email, 'Please confirm your account').then((message) => {
       cy.sendriaGetMessageHtmlById(message.id).then((html) => {
+        expect(message.recipients_message_to).to.contain(email);
+        expect(message.subject).to.contain('Please confirm your account');
+        expect(message.source).to.contain(`Hello ${userName}`);
         const link = html.match(/(?<=href=")(.*)(?=" target)/g)[0];
         cy.visit(link);
         cy.get("strong").should("have.text", "Account confirmed!");
