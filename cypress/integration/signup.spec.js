@@ -18,8 +18,6 @@ describe('Sign up', () => {
     cy.get('div.alert-success').should('have.text', 'User was registered successfully! Please check your email');
     
     cy.sendriaGetMessageByEmailAddressAndSubject(email, 'Please confirm your account').then((message) => {
-      console.log(email);
-      
       cy.sendriaGetMessageHtmlById(message.id).then((html) => {
         expect(message.recipients_message_to).to.contain(email);
         expect(message.subject).to.contain('Please confirm your account');
